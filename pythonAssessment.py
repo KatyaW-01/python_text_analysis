@@ -19,14 +19,14 @@ def split_article():
   text_array = re.split('[\s\n]', clean_text) #array of all the words, split on whitespace or newline
   return text_array
 
-def count_specific_word(word): #refactor to use user input here
+def count_specific_word(word):
   count = 0
   clean_word = word.strip().lower() #removes leading and trailing whitespaces and makes lowercase
   text_array = split_article()
   for string in text_array:
     if clean_word == string.lower():
       count += 1
-  print(f"{clean_word} appears {count} times in the text.")
+  print(f"'{clean_word}' appears {count} times in the text.")
 
 def identify_most_common_word(text):
   word_dictionary = {}
@@ -70,12 +70,20 @@ def count_sentences(text):
 
 
 #function calls
-try:
-  word = input("Enter a word you want to count in the text: ")
-  count_specific_word(word)
-  #add validations for input 
-except ValueError as e:
-  print(f"Error:{e}")
+while True:
+  try:
+    word = input("Enter a word you want to count in the text: ")
+    if not word:
+      raise ValueError("Input cannot be empty.")
+    if word == ' ':
+      raise ValueError("Input cannot be empty")
+    if word.isdigit():
+      raise ValueError("Input cannot be a number, please enter a word.")
+    count_specific_word(word)
+    break
+  except ValueError as e:
+    print(f"Error: {e}")
+
 identify_most_common_word(split_article())
 calculate_average_word_length(split_article())
 count_paragraphs(clean_article())
