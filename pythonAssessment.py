@@ -57,11 +57,15 @@ def count_paragraphs(text):
   print(f"There are {count} paragraphs in the text")
 
 def count_sentences(text):
-  new_text = text.replace('Inc.','Inc') #remove period after Inc. so it doesnt mess up splitting string by .
-  #remove Dr.
-  replaced_text = re.sub(r'[“”"]', '', new_text) #remove quotations
-  sentences = re.split('[.!?]', replaced_text)
-  count = len(sentences)
+  remove_inc = text.replace('Inc.','Inc') #remove period after Inc. so it doesnt mess up splitting string by .
+  remove_dr = remove_inc.replace('Dr.', 'Dr') #Remove period after Dr.
+  replaced_text = re.sub(r'[“”"]', '', remove_dr) #remove quotations
+  sentences = re.split('[.!?]', replaced_text) #split at . ! ?
+  count = 0
+  for sentence in sentences:
+    if len(sentence) > 1:
+      count += 1
+    #excludes elements of just '\n\
   print(f"There are {count} sentences in the text")
 
 
