@@ -20,7 +20,7 @@ def count_specific_word(word): #refactor to use user input here
       count += 1
   print(f"{clean_word} appears {count} times in the text.")
 
-def most_common_word(text):
+def identify_most_common_word(text):
   word_dictionary = {}
   for word in text:
     lowercase_word = word.lower() #lowercase so no duplicates of words
@@ -30,7 +30,7 @@ def most_common_word(text):
   maximum_value = max(word_dictionary,key=word_dictionary.get)
   print(f"The most common word in the text is '{maximum_value}'.")
 
-def average_word_length(text):
+def calculate_average_word_length(text):
   word_length = []
   for string in text:
     word_length.append(len(string))
@@ -40,7 +40,7 @@ def average_word_length(text):
   average_word_length = round((total/len(word_length)),2)
   print(F"The average word length is {average_word_length}.")
 
-def paragraph_count(text):
+def count_paragraphs(text):
   paragraphs = re.split('[\n]', text) #split text at newlines
   count = 0
   for paragraph in paragraphs:
@@ -67,7 +67,7 @@ try:
   #add validations for input 
 except ValueError as e:
   print(f"Error:{e}")
-most_common_word(text_array)
-average_word_length(text_array)
-paragraph_count(clean_text)
+identify_most_common_word(text_array)
+calculate_average_word_length(text_array)
+count_paragraphs(clean_text)
 count_sentences(file_content)
