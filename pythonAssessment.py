@@ -9,27 +9,30 @@ with open(file_path, 'r') as file:
 translator = str.maketrans('', '', string.punctuation)
 text = file_content.translate(translator)  #removes punctuation 
 clean_text = re.sub(r'[^\w\s]', '', text) #removes quotes that werent removed in previous step
-
 text_array = re.split('[\s\n]', clean_text) #array of all the words, split on whitespace or newline
 
 def count_word(word): #refactor to use user input here
   count = 0
+  clean_word = word.strip().lower() #removes leading and trailing whitespaces and makes lowercase
+  print("clean word:",clean_word)
   for string in text_array:
-    if word.lower() == string.lower():
+    if clean_word == string.lower():
       count += 1
-  print(f"{word} appears {count} times in the text.")
+  print(f"{clean_word} appears {count} times in the text.")
 
-count_word('baking')
+
+word = input("Enter a word you want to count in the text: ")
+
+count_word(word)
 
 # identify the most common word
 
 
 
-#calculate the average word length, excluding special characters and puncuation marks from the word length calculation 
 
-def average_word_length():
+def average_word_length(text):
   word_length = []
-  for string in text_array:
+  for string in text:
     word_length.append(len(string))
 
   total = 0
@@ -39,23 +42,23 @@ def average_word_length():
   average_word_length = round((total/len(word_length)),2)
   print(F"The average word length is {average_word_length}.")
 
+average_word_length(text_array)
 
-
-average_word_length()
-
-
-
-
-#count number of paragraphs (based on empty lines between blocks of text) and display count
-def paragraph_count():
-  paragraphs = re.split('[\n]', clean_text) #split text at newlines
+def paragraph_count(text):
+  paragraphs = re.split('[\n]', text) #split text at newlines
   count = 0
   for paragraph in paragraphs:
-    if len(paragraph) > 0: #doesnt count empty strings for double newlines
+    if len(paragraph) > 0: #doesnt count empty strings
       count += 1
 
   print(f"There are {count} paragraphs in the text")
 
-paragraph_count()
+paragraph_count(clean_text)
 
-#count number of sentences (based on punctuation such as periods exclamation marks, and question marks) and display counts
+def count_sentences(text):
+  #replace Inc. with Inc
+  #remove quotes 
+  #split at .!?
+  #return length of that array
+  count = 0
+  print(f"There are {count} sentences in the text")
