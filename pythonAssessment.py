@@ -1,4 +1,3 @@
-import string
 import re
 
 def load_article(article):
@@ -9,7 +8,7 @@ def load_article(article):
 
 def clean_article():
   file = load_article('article.txt')
-  clean_text = re.sub(r'[^\w\s]','',file)
+  clean_text = re.sub(r'[^\w\s]','',file) #removes all punctuation and quotes
   return clean_text
 
 def split_article():
@@ -34,7 +33,7 @@ def identify_most_common_word(text):
       word_dictionary[lowercase_word] = 0
     word_dictionary[lowercase_word] += 1
   maximum_value = max(word_dictionary,key=word_dictionary.get)
-  print(f"The most common word in the text is '{maximum_value}'.")
+  print(f"The most common word in the text is '{maximum_value}', occuring {word_dictionary[maximum_value]} times.")
 
 def calculate_average_word_length(text):
   word_length = []
@@ -66,8 +65,8 @@ def count_sentences(text):
     #excludes elements of just '\n\
   print(f"There are {count} sentences in the text")
 
-
 #function calls
+
 while True:
   try:
     word = input("Enter a word you want to count in the text: ")
@@ -77,8 +76,9 @@ while True:
       raise ValueError("Input cannot be empty")
     if word.isdigit():
       raise ValueError("Input cannot be a number, please enter a word.")
-    count_specific_word(word)
+    count_specific_word(word) 
     break
+    #call function and break out of loop if input is valid
   except ValueError as e:
     print(f"Error: {e}")
 
