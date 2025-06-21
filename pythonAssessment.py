@@ -22,13 +22,21 @@ def count_word(word): #refactor to use user input here
 
 
 word = input("Enter a word you want to count in the text: ")
-
-count_word(word)
-
-# identify the most common word
+#add validations for input 
 
 
+def most_common_word(text):
+  word_dictionary = {}
+  
+  for word in text:
+    lowercase_word = word.lower() #lowercase so no duplicates of words
+    if lowercase_word not in word_dictionary:
+      word_dictionary[lowercase_word] = 0
+    word_dictionary[lowercase_word] += 1
+  
+  maximum_value = max(word_dictionary,key=word_dictionary.get)
 
+  print(f"The most common word in the text is '{maximum_value}'.")
 
 def average_word_length(text):
   word_length = []
@@ -42,8 +50,6 @@ def average_word_length(text):
   average_word_length = round((total/len(word_length)),2)
   print(F"The average word length is {average_word_length}.")
 
-average_word_length(text_array)
-
 def paragraph_count(text):
   paragraphs = re.split('[\n]', text) #split text at newlines
   count = 0
@@ -53,8 +59,6 @@ def paragraph_count(text):
 
   print(f"There are {count} paragraphs in the text")
 
-paragraph_count(clean_text)
-
 def count_sentences(text):
   #replace Inc. with Inc
   #remove quotes 
@@ -62,3 +66,10 @@ def count_sentences(text):
   #return length of that array
   count = 0
   print(f"There are {count} sentences in the text")
+
+#function calls
+
+count_word(word)
+most_common_word(text_array)
+average_word_length(text_array)
+paragraph_count(clean_text)
