@@ -1,20 +1,28 @@
 import string
 import re
 
-file_path = 'article.txt'
-  
-with open(file_path, 'r') as file:
-  file_content = file.read() #article.txt as a string, stored in file_content
+def load_article():
+  file_path = 'article.txt'
+  with open(file_path, 'r') as file:
+    file_content = file.read() #article.txt as a string, stored in file_content
+  return file_content
 
-translator = str.maketrans('', '', string.punctuation)
-text = file_content.translate(translator)  #removes punctuation 
-clean_text = re.sub(r'[^\w\s]', '', text) #removes quotes that werent removed in previous step
-text_array = re.split('[\s\n]', clean_text) #array of all the words, split on whitespace or newline
+def clean_article():
+  file = load_article()
+  translator = str.maketrans('', '', string.punctuation)
+  text = file.translate(translator)  #removes punctuation 
+  clean_text = re.sub(r'[^\w\s]', '', text) #removes quotes that werent removed in previous step
+  return clean_text
+
+def split_article():
+  clean_text = clean_article()
+  text_array = re.split('[\s\n]', clean_text) #array of all the words, split on whitespace or newline
+  return text_array
 
 def count_specific_word(word): #refactor to use user input here
   count = 0
   clean_word = word.strip().lower() #removes leading and trailing whitespaces and makes lowercase
-  print("clean word:",clean_word)
+  text_array = split_article()
   for string in text_array:
     if clean_word == string.lower():
       count += 1
@@ -51,12 +59,9 @@ def count_paragraphs(text):
 def count_sentences(text):
   new_text = text.replace('Inc.','Inc') #remove period after Inc. so it doesnt mess up splitting string by .
   #remove Dr.
-  replaced_text = re.sub(r'[“”"]', '', new_text)
+  replaced_text = re.sub(r'[“”"]', '', new_text) #remove quotations
   sentences = re.split('[.!?]', replaced_text)
-  print(sentences)
-  #print(sentences)
   count = len(sentences)
-  
   print(f"There are {count} sentences in the text")
 
 
@@ -67,7 +72,7 @@ try:
   #add validations for input 
 except ValueError as e:
   print(f"Error:{e}")
-identify_most_common_word(text_array)
-calculate_average_word_length(text_array)
-count_paragraphs(clean_text)
-count_sentences(file_content)
+identify_most_common_word(split_article())
+calculate_average_word_length(split_article())
+count_paragraphs(clean_article())
+count_sentences(load_article())
