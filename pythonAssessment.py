@@ -4,26 +4,30 @@ import re
 file_path = 'article.txt'
   
 with open(file_path, 'r') as file:
-  file_content = file.read()
-
-# the variable file_contact now contains the article.txt as a string
-
-
-#count the number of occurrences of a specified word and display the count
-
-# identify the most common word
-
-#calculate the average word length, excluding special characters and puncuation marks from the word length calculation 
+  file_content = file.read() #article.txt as a string, stored in file_content
 
 translator = str.maketrans('', '', string.punctuation)
 text = file_content.translate(translator)  #removes punctuation 
 clean_text = re.sub(r'[^\w\s]', '', text) #removes quotes that werent removed in previous step
 
-split_text = re.split('[\s\n]', clean_text) #array of all the words, split on whitespace or newline
+text_array = re.split('[\s\n]', clean_text) #array of all the words, split on whitespace or newline
+
+#count the number of occurrences of a specified word and display the count
+
+def count_word(word):
+  count = 0
+  for string in text_array:
+    if word.lower() == string.lower():
+      count += 1
+  print(f"{word} appears {count} times in the text.")
+
+count_word('baking')
+
+# identify the most common word
+
+#calculate the average word length, excluding special characters and puncuation marks from the word length calculation 
 
 
-
-print(split_text)
 
 
 #count number of paragraphs (based on empty lines between blocks of text) and display count
