@@ -12,8 +12,6 @@ clean_text = re.sub(r'[^\w\s]', '', text) #removes quotes that werent removed in
 
 text_array = re.split('[\s\n]', clean_text) #array of all the words, split on whitespace or newline
 
-#count the number of occurrences of a specified word and display the count
-
 def count_word(word): #refactor to use user input here
   count = 0
   for string in text_array:
@@ -49,5 +47,15 @@ average_word_length()
 
 
 #count number of paragraphs (based on empty lines between blocks of text) and display count
+def paragraph_count():
+  paragraphs = re.split('[\n]', clean_text) #split text at newlines
+  count = 0
+  for paragraph in paragraphs:
+    if len(paragraph) > 0: #doesnt count empty strings for double newlines
+      count += 1
+
+  print(f"There are {count} paragraphs in the text")
+
+paragraph_count()
 
 #count number of sentences (based on punctuation such as periods exclamation marks, and question marks) and display counts
