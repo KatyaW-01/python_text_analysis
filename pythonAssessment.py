@@ -14,7 +14,7 @@ text_array = re.split('[\s\n]', clean_text) #array of all the words, split on wh
 
 #count the number of occurrences of a specified word and display the count
 
-def count_word(word):
+def count_word(word): #refactor to use user input here
   count = 0
   for string in text_array:
     if word.lower() == string.lower():
@@ -25,7 +25,25 @@ count_word('baking')
 
 # identify the most common word
 
+
+
 #calculate the average word length, excluding special characters and puncuation marks from the word length calculation 
+
+def average_word_length():
+  word_length = []
+  for string in text_array:
+    word_length.append(len(string))
+
+  total = 0
+  for num in word_length:
+    total += num
+  
+  average_word_length = round((total/len(word_length)),2)
+  print(F"The average word length is {average_word_length}.")
+
+
+
+average_word_length()
 
 
 
