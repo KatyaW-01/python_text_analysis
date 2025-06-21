@@ -1,17 +1,15 @@
 import string
 import re
 
-def load_article():
-  file_path = 'article.txt'
+def load_article(article):
+  file_path = article
   with open(file_path, 'r') as file:
     file_content = file.read() #article.txt as a string, stored in file_content
   return file_content
 
 def clean_article():
-  file = load_article()
-  translator = str.maketrans('', '', string.punctuation)
-  text = file.translate(translator)  #removes punctuation 
-  clean_text = re.sub(r'[^\w\s]', '', text) #removes quotes that werent removed in previous step
+  file = load_article('article.txt')
+  clean_text = re.sub(r'[^\w\s]','',file)
   return clean_text
 
 def split_article():
@@ -87,4 +85,4 @@ while True:
 identify_most_common_word(split_article())
 calculate_average_word_length(split_article())
 count_paragraphs(clean_article())
-count_sentences(load_article())
+count_sentences(load_article('article.txt'))
