@@ -1,3 +1,6 @@
+import string
+import re
+
 file_path = 'article.txt'
   
 with open(file_path, 'r') as file:
@@ -11,9 +14,16 @@ with open(file_path, 'r') as file:
 # identify the most common word
 
 #calculate the average word length, excluding special characters and puncuation marks from the word length calculation 
-  #import string
-  # translator = str.maketrans('', '', string.punctuation)
-  # clean_text = file_content.translate(translator)  #this will remove all punctuation from the file so you can then just split it into words and calculate average word length 
+
+translator = str.maketrans('', '', string.punctuation)
+text = file_content.translate(translator)  #removes punctuation 
+clean_text = re.sub(r'[^\w\s]', '', text) #removes quotes that werent removed in previous step
+
+split_text = re.split('[\s\n]', clean_text) #array of all the words, split on whitespace or newline
+
+
+
+print(split_text)
 
 
 #count number of paragraphs (based on empty lines between blocks of text) and display count
